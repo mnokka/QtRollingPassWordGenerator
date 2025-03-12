@@ -1,3 +1,8 @@
+#include <QApplication>
+#include <QMainWindow>
+#include <QFile>
+#include <QTextStream>
+
 #include "mainwindow.h"
 
 
@@ -5,6 +10,17 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+
+    QFile file(QCoreApplication::applicationDirPath() + "/../../darktheme.css");
+    if (file.open(QFile::ReadOnly | QFile::Text)) {
+        QTextStream ts(&file);
+        a.setStyleSheet(ts.readAll());
+    } else {
+        qWarning("Tyylitiedoston lataaminen epäonnistui.");
+    }
+
+
+
     MainWindow w;
     w.resize(250, 150);
     //QLabel *infoLabel = new QLabel(&w);

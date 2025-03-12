@@ -5,3 +5,5 @@ is copied to clipboard automaticly.
 
 Otherwise main screen will have new generated passowrd every 5th second
 
+
+![Picture](ScreenShot.png)
