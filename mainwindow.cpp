@@ -13,10 +13,20 @@ MainWindow::MainWindow(QWidget *parent)
 
     passwordLabel = new QLabel("Generated passwords will appear here.", this);
     passwordLabel->setAlignment(Qt::AlignCenter);
+    QFont font = passwordLabel->font();
+    font.setPointSize(20);
+    passwordLabel->setFont(font);
+
+    passwordLabel2 = new QLabel("", this);
+    passwordLabel2->setAlignment(Qt::AlignCenter);
+    font.setPointSize(30);
+    passwordLabel2->setFont(font);
+    passwordLabel2->setStyleSheet("color: #00FF00;");
 
     QWidget *centralWidget = new QWidget(this);
     QVBoxLayout *layout = new QVBoxLayout(centralWidget);
     layout->addWidget(passwordLabel);
+    layout->addWidget(passwordLabel2);
     centralWidget->setLayout(layout);
     setCentralWidget(centralWidget);
 
@@ -34,7 +44,7 @@ MainWindow::MainWindow(QWidget *parent)
 void MainWindow::resizeEvent(QResizeEvent *event)
 {
 
-    int newFontSize = event->size().height() / 20; // Säädä jakajaa tarpeen mukaan
+    int newFontSize = event->size().height() / 15; // Säädä jakajaa tarpeen mukaan
     QFont font = infoLabel->font();
     font.setPointSize(newFontSize);
     passwordLabel->setFont(font);
@@ -61,7 +71,7 @@ void MainWindow::createMenus()
 
     timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, &MainWindow::Clockgenerate);
-    timer->start(5000); // 10 000 ms = 10 sekuntia
+    timer->start(3000);
 }
 
 
@@ -71,7 +81,9 @@ void MainWindow::Clockgenerate(void)
     passwordlen = QString::number(lenght);
     autopassword=generatePassword(lenght);
     qDebug() << "AUTOGEN " << autopassword;
-    passwordLabel->setText("Generated password, lenght = " + passwordlen + "\n\n" + autopassword);
+    passwordLabel->setText("Generated password, lenght = " + passwordlen);
+    passwordLabel2->setText(autopassword);
+
 }
 
 

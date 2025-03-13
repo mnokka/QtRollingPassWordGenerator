@@ -40,6 +40,7 @@ private:
     QPushButton *okButton;
     QTimer *timer;
     QLabel *passwordLabel;
+    QLabel *passwordLabel2;
     QString passwordlen;
     QLabel *infoLabel;
 
